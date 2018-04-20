@@ -11,22 +11,6 @@ This is a customer starter kit for Express.
 
 If you plan to `yarn dev:watch`, you would need (nodemon)[https://github.com/remy/nodemon].
 
-### Deploying
+<!-- ### Deploying
 
-While you still have not done anything it's time to deploy your application. By running the following command you can deploy your application absolutely nowhere.
-
-```
-
-```
-
-It's that simple. And when it comes time to scale the application, all you have to do is:
-
-```
-
-```
-
-I know right?
-
-## Contributing
-
-You don't.
+## Contributing -->
