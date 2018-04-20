@@ -3,9 +3,18 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node index.js",
-    "start:watch": "nodemon index.js",
-    "prettier": "prettier --single-quote --trailing-comma es5 --write \"**/*.js\" "
+    "dev": "node index.js",
+    "dev:watch": "nodemon index.js",
+    "prettier": "prettier --single-quote --trailing-comma es5 --write \"**/*.js\" ",
+    "lint:fix": "eslint --ext .js --fix",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "yarn prettier",
+      "yarn lint:fix",
+      "git add"
+    ]
   },
   "dependencies": {
     "chalk": "^2.4.0",
@@ -22,6 +31,9 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-prettier": "^2.6.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.4",
     "prettier": "^1.12.1"
-  }
+  },
+  "license": "MIT"
 }
