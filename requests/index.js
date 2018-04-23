@@ -25,6 +25,13 @@ exports.getHotelInfo = hotelId =>
 
 /* ------------- Employee ------------- */
 
+exports.fetchEmployees = hotelId =>
+  rp({
+    headers,
+    uri: `${baseUrl}/employee/${hotelId}`,
+    json: true,
+  });
+
 exports.addEmployee = body =>
   rp({
     headers,
@@ -72,7 +79,7 @@ exports.createRoom = (hotelId, roomNumber) =>
 exports.checkIn = stayId =>
   rp({
     headers,
-    method: 'PUT',
+    method: 'put',
     uri: `${baseUrl}/stays/checkin/${stayId}`,
     json: true,
   });
