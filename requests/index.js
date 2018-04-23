@@ -76,6 +76,14 @@ exports.createRoom = (hotelId, roomNumber) =>
     json: true,
   });
 
+exports.deleteRoom = stayId =>
+  rp({
+    headers,
+    uri: `${baseUrl}/stays/${stayId}`,
+    method: 'DELETE',
+    json: true,
+  });
+
 exports.checkIn = stayId =>
   rp({
     headers,
