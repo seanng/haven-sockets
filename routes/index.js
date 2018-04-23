@@ -4,11 +4,9 @@ const createError = require('http-errors');
 const router = express.Router();
 
 /* GET home page. */
-const indexRouter = () => {
-  router.get('/', (req, res) => {
-    res.render('index', { title: 'Express' });
-  });
-};
+const indexRouter = router.get('/', (req, res) => {
+  res.render('index', { title: 'Express' });
+});
 
 const handleNotFound = (req, res, next) => {
   next(createError(404));
@@ -24,7 +22,7 @@ const handleServerErrors = (err, req, res) => {
 };
 
 module.exports = app => {
-  app.use('/', indexRouter());
+  app.use('/', indexRouter);
   app.use(handleNotFound);
   app.use(handleServerErrors);
 
