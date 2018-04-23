@@ -14,6 +14,33 @@ exports.fetchEmployeeInfoFromToken = token =>
     json: true,
   });
 
+exports.fetchCustomerInfoFromToken = token =>
+  rp({
+    headers,
+    uri: `${baseUrl}/auth/verify_customer_token`,
+    method: 'POST',
+    body: { token },
+    json: true,
+  });
+
+exports.employeeLogin = body =>
+  rp({
+    headers,
+    method: 'POST',
+    body,
+    uri: `${baseUrl}/auth/employee`,
+    json: true,
+  });
+
+exports.customerLogin = body =>
+  rp({
+    headers,
+    uri: `${baseUrl}/auth/customer`,
+    method: 'POST',
+    body,
+    json: true,
+  });
+
 /* ------------- Hotel ------------- */
 
 exports.getHotelInfo = hotelId =>
@@ -76,15 +103,6 @@ exports.updateEmployee = (employeeId, body) =>
     json: true,
   });
 
-exports.employeeLogin = body =>
-  rp({
-    headers,
-    method: 'POST',
-    body,
-    uri: `${baseUrl}/auth/employee`,
-    json: true,
-  });
-
 exports.deleteEmployeePhoto = body =>
   rp({
     headers,
@@ -105,6 +123,13 @@ exports.createEmployeePhoto = (employeeId, body) =>
 
 /* ------------- Stay ------------- */
 
+exports.fetchCustomerStays = token =>
+  rp({
+    headers,
+    uri: `${baseUrl}/stays/customer/${token}`,
+    json: true,
+  });
+
 exports.fetchHotelStays = (hotelId, body) =>
   rp({
     headers,
@@ -122,19 +147,29 @@ exports.createRoom = (hotelId, roomNumber) =>
     json: true,
   });
 
+exports.createBooking = (token, body) =>
+  rp({
+    headers,
+    uri: `${baseUrl}/stays/`,
+    method: 'PUT',
+    json: true,
+    body,
+  });
+
+exports.updateStay = (stayId, body) =>
+  rp({
+    headers,
+    uri: `${baseUrl}/stays/${stayId}`,
+    method: 'PUT',
+    json: true,
+    body,
+  });
+
 exports.deleteRoom = stayId =>
   rp({
     headers,
     uri: `${baseUrl}/stays/${stayId}`,
     method: 'DELETE',
-    json: true,
-  });
-
-exports.checkIn = stayId =>
-  rp({
-    headers,
-    method: 'put',
-    uri: `${baseUrl}/stays/checkin/${stayId}`,
     json: true,
   });
 
@@ -152,5 +187,25 @@ exports.saveCharges = (stayId, body) =>
     body,
     method: 'post',
     uri: `${baseUrl}/surcharge/stay/${stayId}`,
+    json: true,
+  });
+
+/* ------------- Customer ------------- */
+
+exports.deleteCustomerPhoto = body =>
+  rp({
+    headers,
+    body,
+    method: 'delete',
+    uri: `${baseUrl}/customer/photo`,
+    json: true,
+  });
+
+exports.updateCustomer = body =>
+  rp({
+    headers,
+    body,
+    method: 'put',
+    uri: `${baseUrl}/customer`,
     json: true,
   });

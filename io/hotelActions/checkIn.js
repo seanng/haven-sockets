@@ -1,5 +1,5 @@
 const io = require('../../io');
-const { checkIn } = require('../../requests');
+const { updateStay } = require('../../requests');
 const { reply, emitToCustomer } = require('../helpers');
 
 const handleSuccess = (client, customerId, data) => {
@@ -21,7 +21,7 @@ const handleFail = (client, err) =>
 
 module.exports = async (client, action) => {
   try {
-    const data = await checkIn(action.stayId);
+    const data = await updateStay(action.stayId, { action: 'checkin' });
     return handleSuccess(client, action.customerId, data);
   } catch (err) {
     return handleFail(client, err);
