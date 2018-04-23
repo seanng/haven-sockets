@@ -23,12 +23,30 @@ exports.getHotelInfo = hotelId =>
     json: true,
   });
 
+exports.deleteHotelPhotos = body =>
+  rp({
+    headers,
+    body,
+    uri: `${baseUrl}/hotels/photos`,
+    json: true,
+    method: 'DELETE',
+  });
+
+exports.updateHotel = (hotelId, body) =>
+  rp({
+    headers,
+    method: 'PUT',
+    body,
+    json: true,
+    uri: `${baseUrl}/hotels/${hotelId}`,
+  });
+
 /* ------------- Employee ------------- */
 
 exports.fetchEmployees = hotelId =>
   rp({
     headers,
-    uri: `${baseUrl}/employee/${hotelId}`,
+    uri: `${baseUrl}/employee/hotel/${hotelId}`,
     json: true,
   });
 
@@ -49,6 +67,15 @@ exports.deleteEmployee = employeeId =>
     json: true,
   });
 
+exports.updateEmployee = (employeeId, body) =>
+  rp({
+    headers,
+    uri: `${baseUrl}/employee/${employeeId}`,
+    method: 'PUT',
+    body,
+    json: true,
+  });
+
 exports.employeeLogin = body =>
   rp({
     headers,
@@ -58,12 +85,31 @@ exports.employeeLogin = body =>
     json: true,
   });
 
-/* ------------- Stay ------------- */
-
-exports.fetchActiveStays = hotelId =>
+exports.deleteEmployeePhoto = body =>
   rp({
     headers,
-    uri: `${baseUrl}/stays/active/${hotelId}`,
+    body,
+    method: 'DELETE',
+    json: true,
+    uri: `${baseUrl}/employee/photo`,
+  });
+
+exports.createEmployeePhoto = (employeeId, body) =>
+  rp({
+    headers,
+    body,
+    method: 'POST',
+    json: true,
+    uri: `${baseUrl}/employee/photo${employeeId}`,
+  });
+
+/* ------------- Stay ------------- */
+
+exports.fetchHotelStays = (hotelId, body) =>
+  rp({
+    headers,
+    uri: `${baseUrl}/stays/hotel/${hotelId}`,
+    body,
     json: true,
   });
 
@@ -89,5 +135,22 @@ exports.checkIn = stayId =>
     headers,
     method: 'put',
     uri: `${baseUrl}/stays/checkin/${stayId}`,
+    json: true,
+  });
+
+exports.fetchCharges = stayId =>
+  rp({
+    headers,
+    method: 'get',
+    uri: `${baseUrl}/surcharge/stay/${stayId}`,
+    json: true,
+  });
+
+exports.saveCharges = (stayId, body) =>
+  rp({
+    headers,
+    body,
+    method: 'post',
+    uri: `${baseUrl}/surcharge/stay/${stayId}`,
     json: true,
   });
