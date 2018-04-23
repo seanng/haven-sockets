@@ -3,6 +3,8 @@ const rp = require('request-promise');
 const baseUrl = process.env.baseUrl || 'http://localhost:5050/api';
 const headers = { 'User-Agent': 'Request-Promise' };
 
+/* ------------- Auth ------------- */
+
 exports.fetchEmployeeInfoFromToken = token =>
   rp({
     headers,
@@ -11,6 +13,45 @@ exports.fetchEmployeeInfoFromToken = token =>
     body: { token },
     json: true,
   });
+
+/* ------------- Hotel ------------- */
+
+exports.getHotelInfo = hotelId =>
+  rp({
+    headers,
+    uri: `${baseUrl}/hotels/${hotelId}`,
+    json: true,
+  });
+
+/* ------------- Employee ------------- */
+
+exports.addEmployee = body =>
+  rp({
+    headers,
+    uri: `${baseUrl}/employee/`,
+    method: 'POST',
+    body,
+    json: true,
+  });
+
+exports.deleteEmployee = employeeId =>
+  rp({
+    headers,
+    uri: `${baseUrl}/employee/${employeeId}`,
+    method: 'DELETE',
+    json: true,
+  });
+
+exports.employeeLogin = body =>
+  rp({
+    headers,
+    method: 'POST',
+    body,
+    uri: `${baseUrl}/auth/employee`,
+    json: true,
+  });
+
+/* ------------- Stay ------------- */
 
 exports.fetchActiveStays = hotelId =>
   rp({
@@ -28,18 +69,10 @@ exports.createRoom = (hotelId, roomNumber) =>
     json: true,
   });
 
-exports.addEmployee = body =>
+exports.checkIn = stayId =>
   rp({
     headers,
-    uri: `${baseUrl}/employee/`,
-    method: 'POST',
-    body,
-    json: true,
-  });
-
-exports.getHotelInfo = hotelId =>
-  rp({
-    headers,
-    uri: `${baseUrl}/hotels/${hotelId}`,
+    method: 'PUT',
+    uri: `${baseUrl}/stays/checkin/${stayId}`,
     json: true,
   });
