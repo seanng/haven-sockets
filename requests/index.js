@@ -1,6 +1,6 @@
 const rp = require('request-promise');
 
-const baseUrl = process.env.baseUrl || 'http://localhost:5050/api';
+const baseUrl = process.env.baseUrl || 'http://localhost:5052/api';
 const headers = { 'User-Agent': 'Request-Promise' };
 
 /* ------------- Auth ------------- */
