@@ -1,4 +1,4 @@
-import { updateEmployee } from '../../requests';
+const { updateEmployee } = require('../../requests');
 
 const { reply } = require('../helpers');
 
