@@ -4,7 +4,7 @@ const logger = require('../../configs/logger');
 
 const handleSuccess = (client, data) => {
   reply(client, {
-    type: 'CUSTOMER_AUTH_SUCCESS',
+    type: 'CUSTOMER_LOGIN_SUCCESS',
     data,
   });
 };

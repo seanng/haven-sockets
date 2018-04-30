@@ -147,7 +147,7 @@ exports.createRoom = (hotelId, roomNumber) =>
     json: true,
   });
 
-exports.createBooking = (token, body) =>
+exports.createBooking = body =>
   rp({
     headers,
     uri: `${baseUrl}/stays/`,

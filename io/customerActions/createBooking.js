@@ -23,14 +23,11 @@ const handleFail = (client, errorMsg) =>
     errorMsg,
   });
 
-module.exports = async (client, action) => {
+module.exports = async (client, { profile, token, hotel }) => {
   try {
-    const customerName = `${action.profile.firstName} ${
-      action.profile.lastName
-    }`;
-
-    const booking = await createBooking(action.token, action.hotel);
-    return handleSuccess(client, booking, customerName, action.hotel.id);
+    const customerName = `${profile.firstName} ${profile.lastName}`;
+    const booking = await createBooking({ token, hotel });
+    return handleSuccess(client, booking, customerName, hotel.id);
   } catch (error) {
     logger.error(error);
     return handleFail(client, error);
